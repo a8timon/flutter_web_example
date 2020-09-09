@@ -5,7 +5,7 @@ on:
     branches:
       -master
 
-jobs:
+/* jobs:
   build:
     runs-on: ubuntu-latest
 
@@ -31,5 +31,20 @@ jobs:
      uses: peaceiris/actions-gh-pages@v3
      with:
        github_token: ${{ secrets.token }}
-       publish_dir: ./build/web
+       publish_dir: ./build/web */
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: subosito/flutter-action@v1
+      with:
+        channel: beta
+    - run: flutter config --enable-web
+    - run: flutter pub get
+    - run: flutter test
+    - run: flutter build web
+
       
